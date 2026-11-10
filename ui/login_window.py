@@ -1,5 +1,4 @@
 import sys
-from pathlib import Path
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QWidget, QMessageBox
 from services.auth import authenticate_user, register_user
