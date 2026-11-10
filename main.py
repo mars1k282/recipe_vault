@@ -6,6 +6,8 @@ from ui.login_window import MyWidget
 
 
 def main() -> None:
+    """Основная функция"""
+
     init_db()
     app = QApplication(sys.argv)
 

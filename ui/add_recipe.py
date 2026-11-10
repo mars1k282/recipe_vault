@@ -44,6 +44,8 @@ class AddRecipeWindow(QWidget):
             self.fill_from_import(import_data)
 
     def handle_add_ingredient(self) -> None:
+        """Обработка нажатия кнопки добавить ингредиент"""
+
         text = self.ingredient_input.text().strip()
         if text:
             self.temp_ingredients.append(text)
@@ -51,12 +53,16 @@ class AddRecipeWindow(QWidget):
             self.ingredient_input.clear()
 
     def handle_remove_ingredient(self) -> None:
+        """Обработка нажатия кнопки удалить ингредиент"""
+
         current_row = self.ingredients_list.currentRow()
         if current_row >= 0:
             self.ingredients_list.takeItem(current_row)
             self.temp_ingredients.pop(current_row)
 
     def handle_add_step(self) -> None:
+        """Обработка нажатия кнопки добавить шаг приготовления"""
+
         text = self.step_input.text().strip()
         if text:
             self.temp_steps.append(text)
@@ -65,6 +71,8 @@ class AddRecipeWindow(QWidget):
             self.step_input.clear()
 
     def handle_remove_step(self) -> None:
+        """Обработка нажатия кнопки удалить шаг приготовления"""
+
         current_row = self.steps_list.currentRow()
         if current_row >= 0:
             self.steps_list.takeItem(current_row)
@@ -75,6 +83,8 @@ class AddRecipeWindow(QWidget):
                 self.steps_list.addItem(f"{i}. {step}")
 
     def handle_save(self) -> None:
+        """Обработка нажатия кнопки сохранить"""
+
         name = self.name_input.text().strip()
         description = self.description_input.toPlainText().strip()
 
@@ -120,6 +130,8 @@ class AddRecipeWindow(QWidget):
             self.close()
 
     def handle_select_image(self) -> None:
+        """Обработка нажатия кнопки выбрать изображение"""
+
         file_path, _ = QFileDialog.getOpenFileName(self, "Выбрать фото", "", "Images (*.png *.jpg *.jpeg)")
 
         if file_path:
@@ -136,6 +148,8 @@ class AddRecipeWindow(QWidget):
             self.image_preview.setPixmap(pixmap.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio))
 
     def load_recipe_for_edit(self) -> None:
+        """Обработка нажатия кнопки редактировать из основного окна"""
+
         recipe = get_recipe_by_id(self.recipe_id)
         if not recipe:
             return

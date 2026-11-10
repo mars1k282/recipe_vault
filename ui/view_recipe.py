@@ -28,7 +28,7 @@ class ViewRecipeWindow(QWidget):
         self.load_recipe_data()
 
     def load_recipe_data(self) -> None:
-        """Загружает полный рецепт из БД и заполняет интерфейс"""
+        """Загружает полный рецепт из базы данных и заполняет интерфейс"""
 
         recipe = get_recipe_by_id(self.recipe_id)
 

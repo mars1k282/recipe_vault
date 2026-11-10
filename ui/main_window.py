@@ -72,6 +72,8 @@ class MainWindow(QMainWindow):
             self.recipes_list.addItem(item)
 
     def handle_add_recipe(self) -> None:
+        """Открывает окно создания окна"""
+
         self.add_window = AddRecipeWindow(self.user_id, self)
         self.add_window.show()
 
@@ -232,6 +234,7 @@ class MainWindow(QMainWindow):
 
     def handle_toggle_favorite(self, item) -> None:
         """Добавляет или удаляет рецепт из избранного через ПКМ"""
+
         recipe_id = item.data(Qt.ItemDataRole.UserRole)
 
         toggle_favorite(self.user_id, recipe_id)
