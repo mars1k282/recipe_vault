@@ -124,6 +124,7 @@ class AddRecipeWindow(QWidget):
 
         if file_path:
             assets_dir = Path(__file__).parent.parent / "assets" / "images"
+            assets_dir.mkdir(parents=True, exist_ok=True)
             filename = Path(file_path).name
             new_path = assets_dir / filename
 
