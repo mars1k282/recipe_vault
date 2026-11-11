@@ -5,6 +5,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.utils import ImageReader
 from paths import get_base_path
+import sys
 
 base_path = get_base_path()
 font_path = base_path / "assets" / "arial.ttf"
@@ -46,7 +47,11 @@ def export_recipe_to_pdf(recipe: dict, output_path: str) -> bool:
         y -= 40
 
         if recipe.get('path_to_image'):
-            img_path = Path(__file__).parent.parent / recipe['path_to_image']
+            if getattr(sys, 'frozen', False):
+                img_path = Path(sys.executable).parent / recipe['path_to_image']
+            else:
+                img_path = Path(__file__).parent.parent / recipe['path_to_image']
+
             if img_path.exists():
                 img = ImageReader(str(img_path))
                 c.drawImage(img, 350, y - 250, width=200, height=250, preserveAspectRatio=True)

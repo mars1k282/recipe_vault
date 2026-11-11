@@ -45,7 +45,11 @@ class ViewRecipeWindow(QWidget):
         self.description_label.setText(description)
 
         if recipe['path_to_image']:
-            img_path = Path(__file__).parent.parent / recipe['path_to_image']
+            if getattr(sys, 'frozen', False):
+                img_path = Path(sys.executable).parent / recipe['path_to_image']
+            else:
+                img_path = Path(__file__).parent.parent / recipe['path_to_image']
+
             if img_path.exists():
                 pixmap = QPixmap(str(img_path))
                 self.image_label.setPixmap(pixmap.scaled(250, 250, Qt.AspectRatioMode.KeepAspectRatio,

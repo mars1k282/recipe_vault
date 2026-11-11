@@ -135,13 +135,18 @@ class AddRecipeWindow(QWidget):
         file_path, _ = QFileDialog.getOpenFileName(self, "Выбрать фото", "", "Images (*.png *.jpg *.jpeg)")
 
         if file_path:
-            assets_dir = Path(__file__).parent.parent / "assets" / "images"
+            if getattr(sys, 'frozen', False):
+                base_dir = Path(sys.executable).parent
+            else:
+                base_dir = Path(__file__).parent.parent
+
+            assets_dir = base_dir / "assets" / "images"
             assets_dir.mkdir(parents=True, exist_ok=True)
+
             filename = Path(file_path).name
             new_path = assets_dir / filename
 
             shutil.copy(file_path, new_path)
-
             self.image_path = f"assets/images/{filename}"
 
             pixmap = QPixmap(str(new_path))

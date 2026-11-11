@@ -364,6 +364,7 @@ def delete_category(user_id: int, category_id: int) -> None:
 
 def toggle_favorite(user_id: int, recipe_id: int) -> bool:
     """Добавляет или удаляет рецепт из избранного. Возвращает True, если рецепт добавлен."""
+
     connect = get_connection()
     try:
         exists = connect.execute(
@@ -385,6 +386,7 @@ def toggle_favorite(user_id: int, recipe_id: int) -> bool:
 
 def get_favorite_recipes(user_id: int) -> list[sqlite3.Row]:
     """Возвращает список избранных рецептов пользователя"""
+
     connect = get_connection()
     try:
         recipes = connect.execute('''
